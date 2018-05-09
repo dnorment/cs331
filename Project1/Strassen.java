@@ -114,7 +114,13 @@ public class Strassen
             }
         }
         
+        long start = System.nanoTime();
         int[][] result = Strassen.multiply(one, two);
+        long end = System.nanoTime();
+        long runtime = end - start;
+        
+        System.out.printf("Total runtime: %d ns%n", runtime);
+        
         for (int row=0; row<MATRIX_SIZE; row++)
         {
             for (int col=0; col<MATRIX_SIZE; col++)
