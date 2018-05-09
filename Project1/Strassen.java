@@ -76,9 +76,9 @@ public class Strassen
     public static int[][] add(int[][] one, int[][] two)
     {
         int[][] result = new int[one.length][one.length];
-        for (int row=0; row<one.length/2; row++)
+        for (int row=0; row<one.length; row++)
         {
-            for (int col=0; col<two.length/2; col++)
+            for (int col=0; col<two.length; col++)
             {
                 result[row][col] = one[row][col] + two[row][col];
             }
@@ -89,9 +89,9 @@ public class Strassen
     public static int[][] subtract(int[][] one, int[][] two)
     {
         int[][] result = new int[one.length][one.length];
-        for (int row=0; row<one.length/2; row++)
+        for (int row=0; row<one.length; row++)
         {
-            for (int col=0; col<two.length/2; col++)
+            for (int col=0; col<two.length; col++)
             {
                 result[row][col] = one[row][col] - two[row][col];
             }
