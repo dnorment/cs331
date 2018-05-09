@@ -5,35 +5,31 @@
  */
 public class Classical 
 {
-    public static void multiply(int[][] one, int[][] two) 
+    public static void main(String[] args)
     {
-        int[][] result = new int[one.length][two.length];
+        final int MATRIX_SIZE = 4;
+        int[][] one = new int[MATRIX_SIZE][MATRIX_SIZE];
+        int[][] two = new int[MATRIX_SIZE][MATRIX_SIZE];
+        int[][] result = new int[MATRIX_SIZE][MATRIX_SIZE];
         
-        for (int i=0; i<one.length; i++) //for each row
+        for (int row=0; row<one.length; row++) //for each row
         {
-            for (int j=0; j<two.length; j++) //for each column
+            for (int col=0; col<two.length; col++) //for each column
             {
                 for (int k=0; k<two.length; k++) //inner product
                 {
-                    result[i][j] += one[i][k] * two[k][j];
+                    result[row][col] += one[row][k] * two[k][col];
                 }
             }
         }
         
-        for (int i=0; i<result.length; i++)
+        for (int row=0; row<one.length; row++) //for each row
         {
-            for (int j=0; j<result.length; j++)
+            for (int col=0; col<two.length; col++) //for each column
             {
-                System.out.print(result[i][j] + " ");
+                System.out.print(result[row][col] + " ");
             }
             System.out.println();
         }
-    }
-    
-    public static void main(String[] args)
-    {
-        int[][] one = {{1, 0, 0},{0, 1, 0}, {0, 0, 1}};
-        int[][] two = {{1, 0, 0},{0, 1, 0}, {0, 0, 1}};
-        Classical.multiply(one, two);
     }
 }
