@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  * Divide and conquer matrix multiplication.
  * Expected time complexity O(n^3).
@@ -82,6 +83,15 @@ public class DivideConquer
         final int MATRIX_SIZE = 4;
         int[][] one = new int[MATRIX_SIZE][MATRIX_SIZE];
         int[][] two = new int[MATRIX_SIZE][MATRIX_SIZE];
+        Random rng = new Random();
+        for (int row=0; row<MATRIX_SIZE; row++)
+        {
+            for (int col=0; col<MATRIX_SIZE; col++)
+            {
+                one[row][col] = rng.nextInt(100);
+                two[row][col] = rng.nextInt(100);
+            }
+        }
         
         int[][] result = DivideConquer.multiply(one, two);
         for (int row=0; row<MATRIX_SIZE; row++)

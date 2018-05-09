@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  * Strassen's matrix multiplication.
  * Expected time complexity O(n^2.71).
@@ -103,6 +104,15 @@ public class Strassen
         final int MATRIX_SIZE = 4;
         int[][] one = new int[MATRIX_SIZE][MATRIX_SIZE];
         int[][] two = new int[MATRIX_SIZE][MATRIX_SIZE];
+        Random rng = new Random();
+        for (int row=0; row<MATRIX_SIZE; row++)
+        {
+            for (int col=0; col<MATRIX_SIZE; col++)
+            {
+                one[row][col] = rng.nextInt(100);
+                two[row][col] = rng.nextInt(100);
+            }
+        }
         
         int[][] result = Strassen.multiply(one, two);
         for (int row=0; row<MATRIX_SIZE; row++)
