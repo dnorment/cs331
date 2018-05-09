@@ -18,11 +18,45 @@ public class Strassen
         }
         else
         {
+            result = new int[one.length][two.length];
+            int[][] one_aa = new int[one.length/2][two.length/2];
+            int[][] one_ab = new int[one.length/2][two.length/2];
+            int[][] one_ba = new int[one.length/2][two.length/2];
+            int[][] one_bb = new int[one.length/2][two.length/2];
             
-            int[][] result_aa = add(multiply(one_aa, two_aa), multiply(one_ab, two_ba));
-            int[][] result_ab = add(multiply(one_aa, two_ab), multiply(one_ab, two_bb));
-            int[][] result_ba = add(multiply(one_ba, two_aa), multiply(one_bb, two_ba));
-            int[][] result_bb = add(multiply(one_ba, two_ab), multiply(one_bb, two_bb));
+            int[][] two_aa = new int[one.length/2][two.length/2];
+            int[][] two_ab = new int[one.length/2][two.length/2];
+            int[][] two_ba = new int[one.length/2][two.length/2];
+            int[][] two_bb = new int[one.length/2][two.length/2];
+            
+            for (int row=0; row<one.length/2; row++)
+            {
+                for (int col=0; col<two.length/2; col++)
+                {
+                    one_aa[row][col] = one[row][col];
+                    one_ab[row][col] = one[row][col+one.length/2];
+                    one_ba[row][col] = one[row+one.length/2][col];
+                    one_bb[row][col] = one[row+one.length/2][col+one.length/2];
+                    
+                    two_aa[row][col] = two[row][col];
+                    two_ab[row][col] = two[row][col+two.length/2];
+                    two_ba[row][col] = two[row+two.length/2][col];
+                    two_bb[row][col] = two[row+two.length/2][col+two.length/2];
+                }
+            }
+            
+            int p[][] = multiply(add(one_aa, one_bb), add(two_aa, two_bb));
+            int q[][] = multiply(add(one_ba, one_bb), two_aa);
+            int r[][] = multiply(one_aa, subtract(two_ab, two_bb));
+            int s[][] = multiply(one_bb, subtract(two_ba, two_aa));
+            int t[][] = multiply(add(one_aa, one_ab), two_bb);
+            int u[][] = multiply(subtract(one_ba, one_aa), add(two_aa, two_ab));
+            int v[][] = multiply(subtract(one_ab, one_bb), add(two_ba, two_bb));
+            
+            int[][] result_aa = add(subtract(add(p, s), t), v);
+            int[][] result_ab = add(r, t);
+            int[][] result_ba = add(q, s);
+            int[][] result_bb = add(subtract(add(p, r), q), u);
             
             for (int row=0; row<one.length/2; row++)
             {
@@ -35,6 +69,7 @@ public class Strassen
                 }
             }
         }
+        return result;
     }
     
     public static int[][] add(int[][] one, int[][] two)
@@ -65,7 +100,7 @@ public class Strassen
     
     public static void main(String[] args)
     {
-        final int MATRIX_SIZE = 16;
+        final int MATRIX_SIZE = 4;
         int[][] one = new int[MATRIX_SIZE][MATRIX_SIZE];
         int[][] two = new int[MATRIX_SIZE][MATRIX_SIZE];
         
